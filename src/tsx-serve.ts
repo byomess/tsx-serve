@@ -63,8 +63,8 @@ const parsedArgs = args.reduce((acc, arg, index) => {
                 acc[argDef.long] = nextArgValue.long;
             }
         }
-    } else if (previousArg && !previousArg.startsWith('-')) {
-        acc['path-parts'] = (acc['path-parts'] || []).concat(arg);
+    } else {
+        acc['path'] = acc['path'] || '.';
     }
 
     return acc;
@@ -92,11 +92,9 @@ if (port < 1 || port > 65535) {
     process.exit(1);
 }
 
-const pathToServe = (parsedArgs['path-parts'] || []).join(' ');
-
 // Validate path
-if (pathToServe && !fs.existsSync(pathToServe)) {
-    console.error(`Path does not exist: ${pathToServe}`);
+if (parsedArgs['path'] && !fs.existsSync(parsedArgs['path'])) {
+    console.error(`Path does not exist: ${parsedArgs['path']}`);
     process.exit(1);
 }
 
@@ -109,13 +107,13 @@ if (tunnelConfig && !SUPPORTED_TUNNELS.some(t => t.long === tunnelConfig.long)) 
 
 const app = express();
 
-const path = fs.realpathSync(pathToServe);
+const path = fs.realpathSync(parsedArgs['path']);
 if (fs.lstatSync(path).isFile()) {
     app.get('/', (req, res) => {
         res.sendFile(path);
     });
 } else {
-    app.use(express.static(pathToServe));
+    app.use(express.static(parsedArgs['path']));
 }
 
 const waitToExit = () => {
