@@ -1,6 +1,8 @@
 # tsx-serve
 
-**tsx-serve** is a lightweight, TypeScript-based static file server CLI built on top of [Express.js](https://expressjs.com/). It allows you to quickly serve static files from any directory with customizable options, making it perfect for local development, file sharing, or simple hosting solutions. Has **built-in tunneling** support with custom sub-domains for easy sharing of your local server through the internet by simply using command arguments.
+**tsx-serve** is a lightweight, TypeScript-based static file server CLI built on top of [Express.js](https://expressjs.com/). It allows you to quickly serve static files from any directory with customizable options, making it perfect for local development, file sharing, or simple hosting solutions.
+
+Has **built-in tunneling** support with custom sub-domains for easy sharing of your local server through the internet by simply using command arguments.
 
 ## Features
 
