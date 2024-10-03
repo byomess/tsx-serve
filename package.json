@@ -1,6 +1,6 @@
 {
   "name": "tsx-serve",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "A simple static file server CLI tool.",
   "main": "./dist/tsx-serve.cjs",
   "module": "./dist/tsx-serve.mjs",

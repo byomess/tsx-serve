@@ -36,6 +36,11 @@ const argMap = [
         short: '-h',
         description: 'Show help',
     },
+    {
+        long: '--version',
+        short: '-v',
+        description: 'Show version',
+    }
 ];
 
 const parsedArgs = args.reduce((acc, arg, index) => {
@@ -45,7 +50,7 @@ const parsedArgs = args.reduce((acc, arg, index) => {
     try { previousArg = args[index - 1] } catch (e) { }
 
     if (argDef) {
-        if (argDef.type === 'boolean') {
+        if (!argDef.type || argDef.type === 'boolean') {
             acc[argDef.long] = true;
         } else if (argDef.type === 'number') {
             acc[argDef.long] = parseInt(nextArg, 10);
@@ -63,7 +68,6 @@ const parsedArgs = args.reduce((acc, arg, index) => {
             }
         }
     } else {
-        // If previousArg is not a flag, append to path:
         if (!arg.startsWith('-') && !previousArg?.startsWith('-')) {
             acc['path'] = (acc['path'] || '') + args[index];
         }
@@ -72,8 +76,12 @@ const parsedArgs = args.reduce((acc, arg, index) => {
     return acc;
 }, {});
 
+if (!parsedArgs['path']) {
+    parsedArgs['path'] = '.';
+}
+
 // Show help if requested
-if (parsedArgs['-h']) {
+if (parsedArgs['--help']) {
     console.log('Usage: tsx-serve [options] [path]');
     console.log('Options:');
     argMap.forEach(arg => {
@@ -83,6 +91,13 @@ if (parsedArgs['-h']) {
     console.log('  tsx-serve -p 8080');
     console.log('  tsx-serve -t pinggy .');
     console.log('  tsx-serve -p 80 -t localtunnel -s mysubdomain /var/www');
+    process.exit(0);
+}
+
+// Show version if requested
+if (parsedArgs['--version']) {
+    const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+    console.log(packageJson.version);
     process.exit(0);
 }
 
