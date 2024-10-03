@@ -1,6 +1,6 @@
 {
   "name": "tsx-serve",
-  "version": "1.1.5",
+  "version": "1.1.9",
   "description": "A simple static file server CLI tool.",
   "main": "./dist/tsx-serve.cjs",
   "module": "./dist/tsx-serve.mjs",
@@ -22,11 +22,11 @@
     "build": "pkgroll"
   },
   "dependencies": {
-    "@types/express": "^5.0.0",
     "express": "^4.21.0",
     "localtunnel": "^2.0.2"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/localtunnel": "^2.0.4",
     "@types/node": "^16.11.1",
     "pkgroll": "^2.5.0",
