@@ -105,12 +105,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests on t
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-```
-
-### Key Sections:
-- **Features**: Highlights the simplicity and purpose of the tool.
-- **Installation & Usage**: Clear instructions on how to install and use it.
-- **Development**: Steps for contributing to the project.
-- **Contributing & License**: Basic information for open-source collaboration.
-
-Feel free to customize the `GitHub` URL and any other specific details to match your project!
