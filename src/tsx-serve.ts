@@ -45,7 +45,6 @@ const parsedArgs = args.reduce((acc, arg, index) => {
     try { previousArg = args[index - 1] } catch (e) { }
 
     if (argDef) {
-
         if (argDef.type === 'boolean') {
             acc[argDef.long] = true;
         } else if (argDef.type === 'number') {
@@ -64,7 +63,10 @@ const parsedArgs = args.reduce((acc, arg, index) => {
             }
         }
     } else {
-        acc['path'] = (acc['path'] || '') + args[index];
+        // If previousArg is not a flag, append to path:
+        if (!arg.startsWith('-') && !previousArg?.startsWith('-')) {
+            acc['path'] = (acc['path'] || '') + args[index];
+        }
     }
 
     return acc;
