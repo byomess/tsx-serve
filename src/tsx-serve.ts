@@ -64,7 +64,7 @@ const parsedArgs = args.reduce((acc, arg, index) => {
             }
         }
     } else {
-        acc['path'] = acc['path'] || '.';
+        acc['path'] = (acc['path'] || '') + args[index];
     }
 
     return acc;
