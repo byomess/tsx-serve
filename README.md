@@ -47,7 +47,7 @@ If you want to modify or contribute to this project, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/tsx-serve.git
+   git clone https://github.com/byomess/tsx-serve.git
    ```
 
 2. Install dependencies:
