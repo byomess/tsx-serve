@@ -1,7 +1,7 @@
 import express from 'express';
 import lt from 'localtunnel';
 import fs from 'fs';
-import { spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 
 const SUPPORTED_TUNNELS = [
     { long: 'localtunnel', short: 'lt' },
@@ -118,7 +118,7 @@ if (fs.lstatSync(path).isFile()) {
     app.use(express.static(parsedArgs['path']));
 }
 
-const waitToExit = () => {
+const waitToExit = (childProcess?: ChildProcessWithoutNullStreams) => {
     console.log(`Press \x1b[1mCtrl+C\x1b[0m or \x1b[1mQ\x1b[0m twice to stop the server`);
     let exitCount = 0;
     let exitTimeout: NodeJS.Timeout;
@@ -129,6 +129,10 @@ const waitToExit = () => {
         if (key.toString() === 'q' || key.toString() === 'Q') {
             exitCount++;
             if (exitCount === 2) {
+                if (childProcess) {
+                    console.log('Closing tunnel...');
+                    childProcess.kill('SIGKILL');
+                }
                 console.log('Exiting...');
                 process.exit(0);
             } else {
@@ -181,7 +185,7 @@ app.listen(port, async () => {
                         if (tunnelHttpsUrl) {
                             console.log('Https URL:\t\x1b[1m', tunnelHttpsUrl, '\x1b[0m');
                             console.log('');
-                            waitToExit();
+                            waitToExit(pinggyTunnel);
                         }
                     });
 
