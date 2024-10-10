@@ -59,6 +59,12 @@ const argMap: ArgMapItem[] = [
     }
 ];
 
+// Check OS compatibility (Linux and macOS only)
+if (process.platform === 'win32') {
+    console.error('Windows is not supported (yet). A temporary solution is to use WSL.');
+    process.exit(1);
+}
+
 // Parse CLI arguments
 const parsedArgs = argsParser(process.argv.slice(2), argMap);
 

@@ -74,6 +74,10 @@ Access your files via [http://localhost:4000](http://localhost:4000).
    tsx-serve -t lt -s my-server ./public
   ```
 
+## Supported OSes
+
+Currently, only **Linux** and **macOS** are supported. Windows support will be added soon.
+
 ## Development
 
 If you want to modify or contribute to this project, follow these steps:
